@@ -6,3 +6,4 @@ const db = new Sequelize("db-temantb", "root", "", {
 });
 
 module.exports = db;
+// haloooo
