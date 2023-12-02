@@ -1,12 +1,12 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
 const { DataTypes } = Sequelize;
-const db = require("../config/Database");
-const { v4: uuidv4 } = require("uuid");
+const db = require('../config/Database');
+const { v4: uuidv4 } = require('uuid');
 
-const UUID_PREFIX = "USER_";
+const UUID_PREFIX = 'USER_';
 
 const users = db.define(
-  "users",
+  'users',
   {
     userID: {
       type: DataTypes.UUID,
@@ -20,7 +20,7 @@ const users = db.define(
       type: DataTypes.STRING,
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     password: {
       type: DataTypes.STRING,
