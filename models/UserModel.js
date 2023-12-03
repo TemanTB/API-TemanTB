@@ -12,18 +12,23 @@ const users = db.define(
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     phone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     refresh_token: {
       type: DataTypes.TEXT,
