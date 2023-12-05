@@ -5,7 +5,7 @@ const { getUsers, Register, Login, Logout } = require("../controller/User");
 const {
   getShedule,
   postSchedule,
-  getScheduleById,
+  getScheduleByUser,
 } = require("../controller/Schedule");
 
 // Users / auth
@@ -17,7 +17,7 @@ router.delete("/logout", Logout);
 
 //schedule
 router.get("/schedule", getShedule);
-router.get("/schedule:scheduleID", getScheduleById);
+router.get("/schedule/:userID", getScheduleByUser);
 router.post("/schedule", postSchedule);
 
 module.exports = router;

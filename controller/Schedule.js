@@ -6,7 +6,7 @@ const refreshToken = require("./RefreshToken");
 const getShedule = async (req, res) => {
   try {
     const schedules = await Schedule.findAll({
-      attributes: ["scheduleID", "title", "description", "hour"],
+      attributes: ["scheduleID", "title", "description", "hour", "userID"],
       include: [
         {
           model: User,
@@ -33,18 +33,15 @@ const getShedule = async (req, res) => {
   }
 };
 
-const getScheduleById = async (req, res) => {
+const getScheduleByUser = async (req, res) => {
+  const { userID } = req.params;
+
   try {
-    const schedule = await Schedule.findOne({
+    const schedule = await Schedule.findAll({
       where: {
-        scheduleID: req.params.id,
+        userID: userID,
       },
-      include: [
-        {
-          model: User,
-          attributes: ["name", "email", "phone"],
-        },
-      ],
+      attributes: ["scheduleID", "title", "description", "hour", "userID"],
     });
 
     if (schedule) {
@@ -54,7 +51,7 @@ const getScheduleById = async (req, res) => {
       });
     } else {
       return res.status(404).json({
-        message: "Schedule not found",
+        message: "User ID not found or no schedule associated",
       });
     }
   } catch (error) {
@@ -108,4 +105,4 @@ const postSchedule = async (req, res) => {
   }
 };
 
-module.exports = { getShedule, postSchedule, getScheduleById };
+module.exports = { getShedule, postSchedule, getScheduleByUser };
