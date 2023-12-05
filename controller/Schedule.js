@@ -137,9 +137,40 @@ const editSchedule = async (req, res) => {
   }
 };
 
+const deleteSchedule = async (req, res) => {
+  try {
+    const { scheduleID } = req.params;
+
+    const deletedSchedule = await Schedule.findOne({
+      where: {
+        scheduleID: scheduleID,
+      },
+    });
+
+    if (!deletedSchedule) {
+      return res.status(400).json({
+        message: "cannot find id schedule",
+      });
+    }
+
+    await deletedSchedule.destroy();
+
+    return res.status(200).json({
+      data: deletedSchedule,
+      message: "delete data success",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+};
+
 module.exports = {
   getShedule,
   postSchedule,
   getScheduleByUser,
+  deleteSchedule,
   editSchedule,
 };

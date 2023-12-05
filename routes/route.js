@@ -6,6 +6,7 @@ const {
   getShedule,
   postSchedule,
   getScheduleByUser,
+  deleteSchedule,
   editSchedule,
 } = require("../controller/Schedule");
 
@@ -20,6 +21,7 @@ router.delete("/logout", Logout);
 router.get("/schedule", getShedule);
 router.get("/schedule/:userID", getScheduleByUser);
 router.post("/schedule", postSchedule);
+router.delete("/schedule/delete/:scheduleID", deleteSchedule);
 router.put("/schedule/edit/:scheduleID", editSchedule);
 
 module.exports = router;
