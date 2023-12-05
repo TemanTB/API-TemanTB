@@ -2,6 +2,7 @@ const User = require("../models/UserModel");
 const Schedule = require("../models/Schedule");
 const jwt = require("jsonwebtoken");
 const refreshToken = require("./RefreshToken");
+const { text } = require("express");
 
 const getShedule = async (req, res) => {
   try {
@@ -105,4 +106,40 @@ const postSchedule = async (req, res) => {
   }
 };
 
-module.exports = { getShedule, postSchedule, getScheduleByUser };
+const editSchedule = async (req, res) => {
+  try {
+    const { scheduleID } = req.params;
+    const { title, description, hour } = req.body;
+
+    const updatedSchedule = await Schedule.findByPk(scheduleID);
+
+    if (!updatedSchedule) {
+      return res.status(400).json({
+        message: "cannot find id schedule",
+      });
+    }
+
+    await updatedSchedule.update({
+      title: title,
+      description: description,
+      hour: hour,
+    });
+
+    return res.status(200).json({
+      data: updatedSchedule,
+      message: "update data success",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+};
+
+module.exports = {
+  getShedule,
+  postSchedule,
+  getScheduleByUser,
+  editSchedule,
+};
