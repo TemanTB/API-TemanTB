@@ -8,11 +8,11 @@ const getHealth = async (req, res) => {
     if (getHealth && getHealth.length > 0) {
       return res.status(200).json({
         data: getHealth,
-        message: "success get all schedules",
+        message: "success get all health check",
       });
     } else {
       return res.status(400).json({
-        message: "No schedules found",
+        message: "No health check found",
       });
     }
   } catch (error) {
