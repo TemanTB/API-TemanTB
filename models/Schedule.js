@@ -15,7 +15,7 @@ const Schedule = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    title: {
+    medicineName: {
       type: DataTypes.STRING,
     },
     description: {

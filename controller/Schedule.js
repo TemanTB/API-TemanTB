@@ -7,7 +7,13 @@ const { text } = require("express");
 const getShedule = async (req, res) => {
   try {
     const schedules = await Schedule.findAll({
-      attributes: ["scheduleID", "title", "description", "hour", "userID"],
+      attributes: [
+        "scheduleID",
+        "medicineName",
+        "description",
+        "hour",
+        "userID",
+      ],
       include: [
         {
           model: User,
@@ -42,7 +48,13 @@ const getScheduleByUser = async (req, res) => {
       where: {
         userID: userID,
       },
-      attributes: ["scheduleID", "title", "description", "hour", "userID"],
+      attributes: [
+        "scheduleID",
+        "medicineName",
+        "description",
+        "hour",
+        "userID",
+      ],
     });
 
     if (schedule) {
@@ -64,7 +76,7 @@ const getScheduleByUser = async (req, res) => {
 };
 
 const postSchedule = async (req, res) => {
-  const { title, description, hour } = req.body;
+  const { medicineName, description, hour } = req.body;
 
   try {
     const refreshToken = req.cookies.refreshToken;
@@ -82,7 +94,7 @@ const postSchedule = async (req, res) => {
     const userId = user.userID;
 
     const addSchedule = await Schedule.create({
-      title,
+      medicineName,
       description,
       hour,
       userID: userId,
@@ -109,7 +121,7 @@ const postSchedule = async (req, res) => {
 const editSchedule = async (req, res) => {
   try {
     const { scheduleID } = req.params;
-    const { title, description, hour } = req.body;
+    const { medicineName, description, hour } = req.body;
 
     const updatedSchedule = await Schedule.findByPk(scheduleID);
 
@@ -120,7 +132,7 @@ const editSchedule = async (req, res) => {
     }
 
     await updatedSchedule.update({
-      title: title,
+      medicineName: medicineName,
       description: description,
       hour: hour,
     });

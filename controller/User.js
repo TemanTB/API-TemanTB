@@ -1,4 +1,5 @@
 const User = require("../models/UserModel");
+const Health = require("../models/healthCheckModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -49,6 +50,17 @@ const Register = async (req, res) => {
       phone: phone,
       password: hashPassword,
     });
+
+    await Health.create({
+      weeks: null,
+      date: null,
+      nextDate: null,
+      point: 5,
+      description: null,
+      average: null,
+      userID: newUser.userID,
+    });
+
     return res.status(201).json({
       data: newUser,
       message: "success register data",
