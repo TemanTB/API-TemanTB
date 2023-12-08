@@ -57,7 +57,9 @@ const Register = async (req, res) => {
       nextDate: null,
       point: 5,
       description: null,
+      alert: "Input Your Health Medication",
       average: null,
+      images: null,
       userID: newUser.userID,
     });
 

@@ -25,10 +25,16 @@ const Health = db.define(
     point: {
       type: DataTypes.INTEGER,
     },
+    alert: {
+      type: DataTypes.TEXT,
+    },
     description: {
       type: DataTypes.TEXT,
     },
     average: {
+      type: DataTypes.STRING,
+    },
+    images: {
       type: DataTypes.STRING,
     },
     userID: {

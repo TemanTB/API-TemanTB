@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Des 2023 pada 23.35
+-- Waktu pembuatan: 08 Des 2023 pada 12.45
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.1.12
 
@@ -33,8 +33,10 @@ CREATE TABLE `health` (
   `date` datetime DEFAULT NULL,
   `nextDate` datetime DEFAULT NULL,
   `point` int(11) DEFAULT NULL,
+  `alert` text DEFAULT NULL,
   `description` text DEFAULT NULL,
   `average` varchar(255) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
   `userID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `userUserID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
