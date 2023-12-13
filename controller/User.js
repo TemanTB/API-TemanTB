@@ -110,6 +110,7 @@ const Login = async (req, res) => {
         expiresIn: "1d",
       }
     );
+
     // const refreshToken = jwt.sign(
     //   { userId, name, email },
     //   process.env.REFRESH_TOKEN_SECRET,
@@ -132,7 +133,13 @@ const Login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ token });
+    res.status(201).json({
+      loginResult: {
+        userId: userId,
+        name: name,
+        token: token,
+      },
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
