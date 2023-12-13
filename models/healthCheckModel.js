@@ -37,6 +37,11 @@ const Health = db.define(
     images: {
       type: DataTypes.STRING,
     },
+    time: {
+      type: DataTypes.DATE,
+      defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      allowNull: false,
+    },
     userID: {
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
@@ -45,12 +50,16 @@ const Health = db.define(
   },
   {
     freezeTableName: true,
-    timestamps: false,
+    timestamps: false, // Disable createdAt and updatedAt
   }
 );
 
 Health.beforeCreate((health, options) => {
   health.healthId = `${UUID_PREFIX}${uuidv4()}`;
+});
+
+Health.beforeUpdate((health, options) => {
+  health.time = new Date();
 });
 
 Users.hasMany(Health, { onDelete: "cascade" });

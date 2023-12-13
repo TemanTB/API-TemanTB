@@ -34,7 +34,7 @@ const RefreshToken = async (req, res) => {
             expiresIn: "15s",
           }
         );
-        res.json({ accessToken });
+        res.json({});
       }
     );
   } catch (error) {

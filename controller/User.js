@@ -103,11 +103,11 @@ const Login = async (req, res) => {
     const userId = user.userID;
     const name = user.name;
     const email = user.email;
-    const accessToken = jwt.sign(
+    const token = jwt.sign(
       { userId, name, email },
       process.env.ACCESS_TOKEN_SECRET,
       {
-        expiresIn: "20s",
+        expiresIn: "1d",
       }
     );
     const refreshToken = jwt.sign(
@@ -132,7 +132,7 @@ const Login = async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000,
     });
 
-    res.json({ accessToken });
+    res.json({ token });
   } catch (error) {
     console.error(error);
     return res.status(500).json({

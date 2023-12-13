@@ -13,18 +13,18 @@ const {
 const { getHealth } = require("../controller/Health");
 
 // Users / auth
-router.get("/users", authorization, getUsers);
 router.post("/users", Register);
 router.post("/login", Login);
+router.get("/users", getUsers);
 router.get("/token", RefreshToken);
-router.delete("/logout", Logout);
+router.delete("/logout", authorization, Logout);
 
 //schedule
 router.get("/schedule", authorization, getShedule);
 router.get("/schedule/:userID", authorization, getScheduleByUser);
-router.post("/schedule", postSchedule);
-router.delete("/schedule/delete/:scheduleID", deleteSchedule);
-router.put("/schedule/edit/:scheduleID", editSchedule);
+router.post("/schedule", authorization, postSchedule);
+router.delete("/schedule/delete/:scheduleID", authorization, deleteSchedule);
+router.put("/schedule/edit/:scheduleID", authorization, editSchedule);
 
 //schedule
 router.get("/health", authorization, getHealth);
