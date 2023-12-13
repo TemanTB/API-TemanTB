@@ -110,16 +110,16 @@ const Login = async (req, res) => {
         expiresIn: "1d",
       }
     );
-    const refreshToken = jwt.sign(
-      { userId, name, email },
-      process.env.REFRESH_TOKEN_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
+    // const refreshToken = jwt.sign(
+    //   { userId, name, email },
+    //   process.env.REFRESH_TOKEN_SECRET,
+    //   {
+    //     expiresIn: "1d",
+    //   }
+    // );
 
     await User.update(
-      { refresh_token: refreshToken },
+      { refresh_token: token },
       {
         where: {
           userID: userId,
@@ -127,7 +127,7 @@ const Login = async (req, res) => {
       }
     );
 
-    res.cookie("refreshToken", refreshToken, {
+    res.cookie("refreshToken", token, {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
@@ -142,15 +142,16 @@ const Login = async (req, res) => {
 };
 
 const Logout = async (req, res) => {
-  const refreshToken = req.cookies.refreshToken;
-  if (!refreshToken) {
+  const { authorization } = req.headers;
+  const token = authorization.split(" ")[1];
+  if (!token) {
     return res.sendStatus(204);
   }
 
   try {
     const user = await User.findOne({
       where: {
-        refresh_token: refreshToken,
+        refresh_token: token,
       },
     });
 

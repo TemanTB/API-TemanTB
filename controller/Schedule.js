@@ -1,8 +1,5 @@
 const User = require("../models/UserModel");
 const Schedule = require("../models/Schedule");
-const jwt = require("jsonwebtoken");
-const refreshToken = require("./RefreshToken");
-const { text } = require("express");
 
 const getShedule = async (req, res) => {
   try {
@@ -79,15 +76,16 @@ const postSchedule = async (req, res) => {
   const { medicineName, description, hour } = req.body;
 
   try {
-    const refreshToken = req.cookies.refreshToken;
+    const { authorization } = req.headers;
+    const token = authorization.split(" ")[1];
 
-    if (!refreshToken) {
+    if (!token) {
       return res.sendStatus(204);
     }
 
     const user = await User.findOne({
       where: {
-        refresh_token: refreshToken,
+        refresh_token: token,
       },
     });
 
