@@ -44,3 +44,5 @@ Users.hasMany(Schedule, { onDelete: "cascade" });
 Schedule.belongsTo(Users, { foreignKey: "userID" });
 
 module.exports = Schedule;
+
+//
