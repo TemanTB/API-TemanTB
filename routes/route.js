@@ -10,7 +10,12 @@ const {
   deleteSchedule,
   editSchedule,
 } = require("../controller/Schedule");
-const { getHealth } = require("../controller/Health");
+const {
+  getHealth,
+  getHealthbyUser,
+  getPointHealthbyUser,
+  getnextDateMessage,
+} = require("../controller/Health");
 
 // Users / auth
 router.post("/users", Register);
@@ -26,7 +31,10 @@ router.post("/schedule", authorization, postSchedule);
 router.delete("/schedule/delete/:scheduleID", authorization, deleteSchedule);
 router.put("/schedule/edit/:scheduleID", authorization, editSchedule);
 
-//schedule
+//health check
 router.get("/health", authorization, getHealth);
+router.get("/health/:userID", authorization, getHealthbyUser);
+router.get("/health/point/:userID", authorization, getPointHealthbyUser);
+router.get("/health/alert/:userID", authorization, getnextDateMessage);
 
 module.exports = router;
