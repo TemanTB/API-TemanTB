@@ -50,7 +50,7 @@ const Health = db.define(
   },
   {
     freezeTableName: true,
-    timestamps: false, // Disable createdAt and updatedAt
+    timestamps: false,
   }
 );
 

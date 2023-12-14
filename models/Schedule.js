@@ -19,10 +19,10 @@ const Schedule = db.define(
       type: DataTypes.STRING,
     },
     description: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
     hour: {
-      type: DataTypes.TIME,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     userID: {
