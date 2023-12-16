@@ -116,6 +116,28 @@ const postSchedule = async (req, res) => {
   }
 };
 
+const getAllSchedule = async (req, res) => {
+  try {
+    const { scheduleID } = req.params;
+
+    const getShedule = await Schedule.findAll({
+      where: {
+        scheduleID: scheduleID,
+      },
+    });
+
+    return res.status(200).json({
+      data: getShedule,
+      message: "success get schedule",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+};
+
 const editSchedule = async (req, res) => {
   try {
     const { scheduleID } = req.params;
@@ -183,4 +205,5 @@ module.exports = {
   getScheduleByUser,
   deleteSchedule,
   editSchedule,
+  getAllSchedule,
 };

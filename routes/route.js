@@ -9,6 +9,7 @@ const {
   getScheduleByUser,
   deleteSchedule,
   editSchedule,
+  getAllSchedule,
 } = require("../controller/Schedule");
 const {
   getHealth,
@@ -26,6 +27,7 @@ router.delete("/logout", authorization, Logout);
 
 //schedule
 router.get("/schedule", authorization, getShedule);
+router.get("/schedule/:scheduleID", authorization, getAllSchedule);
 router.get("/schedule/:userID", authorization, getScheduleByUser);
 router.post("/schedule", authorization, postSchedule);
 router.delete("/schedule/delete/:scheduleID", authorization, deleteSchedule);
