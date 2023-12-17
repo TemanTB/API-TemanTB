@@ -1,3 +1,4 @@
+const Schedule = require("../models/Schedule");
 const User = require("../models/UserModel");
 const Health = require("../models/healthCheckModel");
 
@@ -21,7 +22,86 @@ const getHealth = async (req, res) => {
       message: "Internal server error",
     });
   }
-  s;
+};
+
+const getHealthById = async (req, res) => {
+  try {
+    const { healthId } = req.params;
+
+    const getId = await Schedule.findOne({
+      where: {
+        healthId: healthId,
+      },
+    });
+
+    return res.status(200).json({
+      data: getId,
+      message: "success get data by id",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Internal server error",
+    });
+  }
+};
+
+const editHealth = async (req, res) => {
+  try {
+    const { healthId } = req.params;
+    const { description } = req.body;
+
+    const updateHealth = await Schedule.findByPk(healthId);
+
+    if (!updateHealth) {
+      return res.status(400).json({
+        message: "cannot find id health",
+      });
+    }
+
+    await updateHealth.update({
+      description: description,
+    });
+
+    return res.status(200).json({
+      data: updateHealth,
+      message: "update health success",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
+};
+
+const deleteHealth = async (req, res) => {
+  try {
+    const { healthId } = req.params;
+
+    const deleteHealth = await Schedule.findOne({
+      where: {
+        healthId: healthId,
+      },
+    });
+
+    if (!deleteHealth) {
+      return res.status(400).json({
+        message: "cannot find id health",
+      });
+    }
+
+    await deleteHealth.destroy();
+
+    return res.status(200).json({
+      message: "delete data success",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "internal server error",
+    });
+  }
 };
 
 const getHealthbyUser = async (req, res) => {
@@ -90,4 +170,7 @@ module.exports = {
   getHealthbyUser,
   getPointHealthbyUser,
   getnextDateMessage,
+  editHealth,
+  getHealthById,
+  deleteHealth,
 };
