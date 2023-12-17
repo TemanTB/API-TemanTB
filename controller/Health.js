@@ -1,4 +1,3 @@
-const Schedule = require("../models/Schedule");
 const User = require("../models/UserModel");
 const Health = require("../models/healthCheckModel");
 
@@ -28,11 +27,12 @@ const getHealthById = async (req, res) => {
   try {
     const { healthId } = req.params;
 
-    const getId = await Schedule.findOne({
-      where: {
-        healthId: healthId,
-      },
-    });
+    const getId = await Health.findByPk(healthId);
+
+    if (!getId)
+      return res
+        .status(404)
+        .json({ message: "Cannot find health with the specified ID" });
 
     return res.status(200).json({
       data: getId,
@@ -46,40 +46,11 @@ const getHealthById = async (req, res) => {
   }
 };
 
-const editHealth = async (req, res) => {
-  try {
-    const { healthId } = req.params;
-    const { description } = req.body;
-
-    const updateHealth = await Schedule.findByPk(healthId);
-
-    if (!updateHealth) {
-      return res.status(400).json({
-        message: "cannot find id health",
-      });
-    }
-
-    await updateHealth.update({
-      description: description,
-    });
-
-    return res.status(200).json({
-      data: updateHealth,
-      message: "update health success",
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      message: "internal server error",
-    });
-  }
-};
-
 const deleteHealth = async (req, res) => {
   try {
     const { healthId } = req.params;
 
-    const deleteHealth = await Schedule.findOne({
+    const deleteHealth = await Health.findOne({
       where: {
         healthId: healthId,
       },
@@ -170,7 +141,6 @@ module.exports = {
   getHealthbyUser,
   getPointHealthbyUser,
   getnextDateMessage,
-  editHealth,
   getHealthById,
   deleteHealth,
 };
