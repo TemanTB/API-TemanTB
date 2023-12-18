@@ -41,6 +41,6 @@ router.get("/health/:userID", authorization, getHealthbyUser);
 router.get("/health/point/:userID", authorization, getPointHealthbyUser);
 router.get("/health/alert/:userID", authorization, getnextDateMessage);
 router.get("/health/healthid/:healthId", authorization, getHealthById);
-router.get("/health/delete/:healthId", authorization, deleteHealth);
+router.delete("/health/delete/:healthId", authorization, deleteHealth);
 
 module.exports = router;
