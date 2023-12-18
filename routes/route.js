@@ -18,7 +18,6 @@ const {
   getnextDateMessage,
   getHealthById,
   deleteHealth,
-  editHealth,
 } = require("../controller/Health");
 
 // Users / auth
