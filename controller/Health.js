@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const Health = require("../models/healthCheckModel");
+const Sequelize = require("sequelize");
 
 const getHealth = async (req, res) => {
   try {
@@ -101,7 +102,10 @@ const getPointHealthbyUser = async (req, res) => {
   try {
     const getPointUsers = await Health.findAll({
       where: { userID: userID },
-      attributes: ["point"],
+      attributes: [
+        [Sequelize.fn("date", Sequelize.col("time")), "date"],
+        "point",
+      ],
       order: [["time", "ASC"]],
     });
 
