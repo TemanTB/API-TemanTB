@@ -30,7 +30,7 @@ router.delete("/logout", authorization, Logout);
 //schedule
 router.get("/schedule", authorization, getShedule);
 router.get("/schedule/:scheduleID", authorization, getAllSchedule);
-router.get("/schedule/:userID", authorization, getScheduleByUser);
+router.get("/schedule/user/:userID", authorization, getScheduleByUser);
 router.post("/schedule", authorization, postSchedule);
 router.delete("/schedule/delete/:scheduleID", authorization, deleteSchedule);
 router.put("/schedule/edit/:scheduleID", authorization, editSchedule);
