@@ -5,11 +5,12 @@ steps:
 
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA", "."]
+
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA"]
-  #   deploy in cloud run in staging
+
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
-    entrypoint: gcloud
+    entrypoint: "gcloud"
     args:
       [
         "run",
@@ -18,7 +19,7 @@ steps:
         "--image",
         "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA",
         "--region",
-        "us-central-1",
-        "--platform"
-        'managed'
+        "us-central1",
+        "--platform",
+        "managed",
       ]
