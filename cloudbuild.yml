@@ -4,12 +4,6 @@ steps:
     args: ["install"]
 
   - name: "gcr.io/cloud-builders/docker"
-    args:
-      [
-        "build",
-        "-t",
-        "gcr.io/latihan-chandra/api-temantb/PROJECT_ID:$SHORT_SHA",
-        ".",
-      ]
+    args: ["build", "-t", "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA", "."]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/latihan-chandra/api-temantb/PROJECT_ID:$SHORT_SHA"]
+    args: ["push", "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA"]
