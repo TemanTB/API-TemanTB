@@ -19,4 +19,6 @@ steps:
         "gcr.io/latihan-chandra/api-temantb:$SHORT_SHA",
         "--region",
         "us-central-1",
+        "--platform"
+        'managed'
       ]
