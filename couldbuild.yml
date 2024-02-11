@@ -15,4 +15,4 @@ steps:
         ".",
       ]
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "LOCATION-docker.pkg.dev/PROJECT_ID/REPOSITORY/IMAGE_NAME"]
+    args: ["push", "gcr.io/latihan-chandra/api-temantb/PROJECT_ID:$SHORT_SHA"]
