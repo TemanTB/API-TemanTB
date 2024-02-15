@@ -20,5 +20,6 @@ steps:
       - "gcr.io/latihan-chandra/api-temantb:$COMMIT_SHA"
       - "--region"
       - "us-central1"
+      - "--allow-unauthenticated"
 images:
   - "gcr.io/latihan-chandra/api-temantb:$COMMIT_SHA"
