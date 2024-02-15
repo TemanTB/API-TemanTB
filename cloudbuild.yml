@@ -15,10 +15,10 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "SERVICE-NAME"
+      - "latihan-cicd"
       - "--image"
       - "gcr.io/latihan-chandra/api-temantb:$COMMIT_SHA"
       - "--region"
-      - "REGION"
+      - "us-central1"
 images:
   - "gcr.io/latihan-chandra/api-temantb:$COMMIT_SHA"
